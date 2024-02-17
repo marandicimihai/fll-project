@@ -22,8 +22,9 @@ namespace FLL.Controllers
         {
             if (Request.Cookies.ContainsKey("userId"))
             {
+                var userId = Request.Cookies["userId"];
                 var exhibitId = _context.Rating.FirstOrDefault(
-                    e => e.UserId.ToString() == Request.Cookies.First(kvp => kvp.Key == "userId").Value)?.ExhibitId;
+                    e => e.UserId.ToString() == userId)?.ExhibitId;
 
                 if (exhibitId != null)
                 {
@@ -31,7 +32,7 @@ namespace FLL.Controllers
                     {
                         Exhibits = await _context.Exhibit.Include(e => e.Ratings).OrderBy(e => e.ExhibitName).ToListAsync(),
                         LikedExhibit = await _context.Exhibit.FirstAsync(e => e.ExhibitId == exhibitId)
-                    }); ;
+                    });
                 }
             }
 

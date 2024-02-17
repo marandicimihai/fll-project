@@ -31,9 +31,9 @@
         {
             <p>You need to scan a ticket to rate this exhibit.</p>
         }
-        <h5>Reviews:</h5>
-        @if (Model.Ratings.Count() > 0)
+        @if (Model.Ratings.Count() > 0 && Model.Ratings.Any(r => !string.IsNullOrEmpty(r.Message)))
         {
+            <h5 class="mt-3">Reviews:</h5>
             foreach(var rating in Model.Ratings)
             {
                 if (!string.IsNullOrEmpty(rating.Message))

@@ -1,8 +1,8 @@
 ﻿@model Exhibit
 
-<div style="width: 400px">
-    <img src="@Model.PhotoUrl1" width="400" class="mw-100"/>
+<a asp-controller="Exhibits" asp-action="Details" asp-route-id="@Model.ExhibitId" style="width: 400px; color: inherit" class="text-decoration-none">
+    <img src="@Model.PhotoUrl1" width="400" height="300" class="mw-100" style="object-fit: cover"/>
     <div class="d-flex justify-content-between">
-        <p>@Model.ExhibitName</p>
+        <h4>@Model.ExhibitName</h4>
     </div>
-</div>
+</a>

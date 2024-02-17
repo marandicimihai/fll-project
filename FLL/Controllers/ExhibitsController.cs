@@ -58,16 +58,12 @@ namespace FLL.Controllers
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("ExhibitId,ExhibitName,ExhibitDescription,PhotoUrl1,PhotoUrl2")] Exhibit exhibit)
+        public async Task<IActionResult> Create([Bind("ExhibitName,ExhibitDescription,PhotoUrl1,PhotoUrl2")] Exhibit exhibit)
         {
-            if (ModelState.IsValid)
-            {
-                exhibit.ExhibitId = Guid.NewGuid();
-                _context.Add(exhibit);
-                await _context.SaveChangesAsync();
-                return RedirectToAction(nameof(Index));
-            }
-            return View(exhibit);
+            exhibit.ExhibitId = Guid.NewGuid();
+            _context.Add(exhibit);
+            await _context.SaveChangesAsync();
+            return RedirectToAction(nameof(Index));
         }
 
         // GET: Exhibits/Edit/5
