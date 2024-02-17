@@ -11,7 +11,6 @@ using Microsoft.AspNetCore.Authorization;
 
 namespace FLL.Controllers
 {
-    [Authorize]
     public class RatingsController : Controller
     {
         private readonly ApplicationDbContext _context;
@@ -21,12 +20,16 @@ namespace FLL.Controllers
             _context = context;
         }
 
+
+        [Authorize]
         // GET: Ratings
         public async Task<IActionResult> Index()
         {
             return View(await _context.Rating.ToListAsync());
         }
 
+
+        [Authorize]
         // GET: Ratings/Details/5
         public async Task<IActionResult> Details(Guid? id)
         {
@@ -45,6 +48,8 @@ namespace FLL.Controllers
             return View(rating);
         }
 
+
+        [Authorize]
         // GET: Ratings/Create
         public IActionResult Create()
         {
@@ -54,9 +59,9 @@ namespace FLL.Controllers
         // POST: Ratings/Create
         // To protect from overposting attacks, enable the specific properties you want to bind to.
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
+        [AllowAnonymous]
         [HttpPost]
         [ValidateAntiForgeryToken]
-        [AllowAnonymous]
         public async Task<IActionResult> Create(Guid exhibitId, Guid userId, double ratingValue)
         {
             if (ModelState.IsValid)
@@ -90,6 +95,8 @@ namespace FLL.Controllers
             return View(rating);
         }
 
+
+        [Authorize]
         [HttpPost]
         [AllowAnonymous]
         public async Task<IActionResult> UpdateRatingMessage(Guid ratingId, Rating ratingForm)
@@ -106,6 +113,8 @@ namespace FLL.Controllers
             return View("ThankYou");
         }
 
+
+        [Authorize]
         // GET: Ratings/Edit/5
         public async Task<IActionResult> Edit(Guid? id)
         {
@@ -122,6 +131,8 @@ namespace FLL.Controllers
             return View(rating);
         }
 
+
+        [Authorize]
         // POST: Ratings/Edit/5
         // To protect from overposting attacks, enable the specific properties you want to bind to.
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
@@ -157,6 +168,8 @@ namespace FLL.Controllers
             return View(rating);
         }
 
+
+        [Authorize]
         // GET: Ratings/Delete/5
         public async Task<IActionResult> Delete(Guid? id)
         {
@@ -175,6 +188,8 @@ namespace FLL.Controllers
             return View(rating);
         }
 
+
+        [Authorize]
         // POST: Ratings/Delete/5
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]

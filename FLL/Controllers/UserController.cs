@@ -22,10 +22,7 @@ namespace FLL.Controllers
         [Authorize]
         public async Task<IActionResult> CreateUser()
         {
-            var newUser = new User()
-            {
-                UserId = Guid.NewGuid()
-            };
+            var newUser = new User();
 
             await _context.User.AddAsync(newUser);
 
