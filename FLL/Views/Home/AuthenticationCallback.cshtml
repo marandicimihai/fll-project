@@ -1,0 +1,10 @@
+﻿<h1>@ViewData["Title"]</h1>
+
+@if (Context.Request.Cookies.ContainsKey("userId"))
+{
+    <p>You are authenticated.</p>
+}
+else
+{
+    <p>You are not logged in.</p>
+}

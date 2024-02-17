@@ -1,0 +1,48 @@
+﻿@model FLL.Models.Exhibit
+
+@{
+    ViewData["Title"] = "Create";
+}
+
+<h1>Create</h1>
+
+<h4>Exhibit</h4>
+<hr />
+<div class="row">
+    <div class="col-md-4">
+        <form asp-action="Create">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <div class="mb-3">
+                <label asp-for="ExhibitName" class="control-label"></label>
+                <input asp-for="ExhibitName" class="form-control" />
+                <span asp-validation-for="ExhibitName" class="text-danger"></span>
+            </div>
+            <div class="mb-3">
+                <label asp-for="ExhibitDescription" class="control-label"></label>
+                <input asp-for="ExhibitDescription" class="form-control" />
+                <span asp-validation-for="ExhibitDescription" class="text-danger"></span>
+            </div>
+            <div class="mb-3">
+                <label asp-for="PhotoUrl1" class="control-label"></label>
+                <input asp-for="PhotoUrl1" class="form-control" />
+                <span asp-validation-for="PhotoUrl1" class="text-danger"></span>
+            </div>
+            <div class="mb-3">
+                <label asp-for="PhotoUrl2" class="control-label"></label>
+                <input asp-for="PhotoUrl2" class="form-control" />
+                <span asp-validation-for="PhotoUrl2" class="text-danger"></span>
+            </div>
+            <div class="mb-3">
+                <input type="submit" value="Create" class="btn btn-primary" />
+            </div>
+        </form>
+    </div>
+</div>
+
+<div>
+    <a asp-action="Index">Back to List</a>
+</div>
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}

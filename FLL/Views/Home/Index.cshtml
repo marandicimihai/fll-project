@@ -1,0 +1,16 @@
+﻿@model HomePageModel
+
+<h1>You liked:</h1>
+<div class="row">
+    <div class="col-4">
+        <partial name="_ExhibitCard" model="@Model.LikedExhibit" />
+    </div>
+</div>
+
+<h1>Innovation around you</h1>
+<div class="row row-cols-1 g-3 row-cols-md-2 row-cols-lg-3">
+    @foreach(var exhibit in Model.Exhibits)
+    {
+        <partial name="_ExhibitCard" model="exhibit" />
+    }
+</div>

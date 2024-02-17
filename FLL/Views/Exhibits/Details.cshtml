@@ -1,0 +1,46 @@
+﻿@model FLL.Models.Exhibit
+
+@{
+    ViewData["Title"] = "Details";
+}
+
+<div>
+    <h3>@Model.ExhibitName</h3>
+    <hr />
+    <div class="row row-cols-1">
+        <div class="col">
+            <img src="@Model.PhotoUrl1" width="600" class="mw-100">
+            <img src="@Model.PhotoUrl2" width="600" class="mw-100">
+        </div>
+        <div class="col">
+            @Html.DisplayFor(model => model.ExhibitDescription)
+        </div>
+        @if (Context.Request.Cookies.ContainsKey("userId"))
+        {
+            var cookies = Context.Request.Cookies;
+            var userId = Context.Request.Cookies.First(kvp => kvp.Key == "userId").Value;
+
+            <p>Like this exhibit?</p>
+            <div class="d-flex">
+                <form method="post" asp-controller="Ratings" asp-action="Create" asp-route-exhibitId="@Model.ExhibitId" asp-route-userId="@userId" asp-route-ratingValue="1">
+                    <button type="submit" class="btn-outline-dark">👍</button>
+                </form>
+            </div>
+        }
+        else
+        {
+            <p>You need to scan a ticket to rate this exhibit.</p>
+        }
+        <h5>Reviews:</h5>
+        @if (Model.Ratings.Count() > 0)
+        {
+            foreach(var rating in Model.Ratings)
+            {
+                if (!string.IsNullOrEmpty(rating.Message))
+                {
+                    <p class="mt-2">@rating.Message</p>
+                }
+            }
+        }
+    </div>
+</div>

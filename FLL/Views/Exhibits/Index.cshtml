@@ -1,0 +1,54 @@
+﻿@model IEnumerable<FLL.Models.Exhibit>
+
+@{
+    ViewData["Title"] = "Index";
+}
+
+<h1>Index</h1>
+
+<p>
+    <a asp-action="Create">Create New</a>
+</p>
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.ExhibitName)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.ExhibitDescription)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.PhotoUrl1)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.PhotoUrl2)
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.ExhibitName)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.ExhibitDescription)
+                </td>
+                <td>
+                    <img src="@item.PhotoUrl1" width="200" class="object-fit-cover" />
+                </td>
+                <td>
+                    <img src="@item.PhotoUrl2" width="200" class="object-fit-cover" />
+                </td>
+                <td>
+                    <a asp-action="Edit" asp-route-id="@item.ExhibitId">Edit</a> |
+                    <a asp-action="Details" asp-route-id="@item.ExhibitId">Details</a> |
+                    <a asp-action="Delete" asp-route-id="@item.ExhibitId">Delete</a>
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>
