@@ -20,24 +20,20 @@ namespace FLL.Controllers
         }
 
         [Authorize]
-        [Route("user/add/{userGuid}")]
-        public async Task<IActionResult> AddUser(string userGuid)
+        public async Task<IActionResult> CreateUser()
         {
-            if (!Guid.TryParse(userGuid, out var userId))
-                return BadRequest();
-
             var newUser = new User()
             {
-                UserId = userId
+                UserId = Guid.NewGuid()
             };
 
             await _context.User.AddAsync(newUser);
 
             await _context.SaveChangesAsync();
 
-            return View("CreateUser", userId);
+            return View(newUser.UserId);
         }
-
+        
         [Route("user/authenticate/{userGuid}")]
         public IActionResult Authenticate(string userGuid)
         {
