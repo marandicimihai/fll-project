@@ -1,8 +1,19 @@
 ﻿@model Exhibit
 
-<a asp-controller="Exhibits" asp-action="Details" asp-route-id="@Model.ExhibitId" style="width: 400px; color: inherit" class="text-decoration-none">
-    <img src="@Model.PhotoUrl1" width="400" height="300" class="mw-100" style="object-fit: cover"/>
-    <div class="d-flex justify-content-between">
-        <h4>@Model.ExhibitName</h4>
+
+
+<div class="col-md-4">
+    <div class="card mb-4 product-wap rounded-0">
+        <div class="card rounded-0">
+            <img class="card-img rounded-0 img-fluid" src="@Model.PhotoUrl1">
+            <div class="card-img-overlay rounded-0 product-overlay d-flex align-items-center justify-content-center">
+                <ul class="list-unstyled">
+                    <li><a class="btn btn-success text-white mt-2" asp-controller="Exhibits" asp-action="Details" asp-route-id="@Model.ExhibitId"><i class="far fa-eye"></i></a></li>
+                </ul>
+            </div>
+        </div>
+        <div class="card-body">
+            <a asp-controller="Exhibits" asp-action="Details" asp-route-id="@Model.ExhibitId" class="h2 text-decoration-none">@Model.ExhibitName</a>
+        </div>
     </div>
-</a>
+</div>

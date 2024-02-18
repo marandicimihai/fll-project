@@ -5,42 +5,57 @@
 }
 
 <div>
-    <h3>@Model.ExhibitName</h3>
-    <hr />
-    <div class="row row-cols-1">
-        <div class="col">
-            <img src="@Model.PhotoUrl1" width="600" class="mw-100">
-            <img src="@Model.PhotoUrl2" width="600" class="mw-100">
-        </div>
-        <div class="col">
-            @Html.DisplayFor(model => model.ExhibitDescription)
-        </div>
-        @if (Context.Request.Cookies.ContainsKey("userId"))
-        {
-            var cookies = Context.Request.Cookies;
-            var userId = Context.Request.Cookies.First(kvp => kvp.Key == "userId").Value;
+    <!-- Open Content -->
+    <section class="bg-light">
+        <div class="container pb-5">
+            <div class="row">
+                <div class="col-lg-5 mt-5">
+                    <div class="card mb-3">
+                        <img class="card-img img-fluid" src="@Model.PhotoUrl1" alt="Card image cap" id="product-detail">
+                    </div>
+                </div>
+                <!-- col end -->
+                <div class="col-lg-7 mt-5">
+                    <div class="card">
+                        <div class="card-body">
+                            <h1 class="h2">@Model.ExhibitName</h1>
+                            <p class="py-2">
+                                <span class="list-inline-item text-dark">Rating 4.8 | 36 Comments</span>
+                            </p>
+                            <h6>Description:</h6>
+                            <p>@Html.DisplayFor(model => model.ExhibitDescription)</p>
+                            @if (Context.Request.Cookies.ContainsKey("userId"))
+                            {
+                                var cookies = Context.Request.Cookies;
+                                var userId = Context.Request.Cookies.First(kvp => kvp.Key == "userId").Value;
 
-            <p>Like this exhibit?</p>
-            <div class="d-flex">
-                <form method="post" asp-controller="Ratings" asp-action="Create" asp-route-exhibitId="@Model.ExhibitId" asp-route-userId="@userId" asp-route-ratingValue="1">
-                    <button type="submit" class="btn-outline-dark">👍</button>
-                </form>
+                                <p>Like this exhibit?</p>
+                                <div class="d-flex">
+                                    <form method="post" asp-controller="Ratings" asp-action="Create" asp-route-exhibitId="@Model.ExhibitId" asp-route-userId="@userId" asp-route-ratingValue="1">
+                                        <button type="submit" class="btn-outline-dark">👍</button>
+                                    </form>
+                                </div>
+                            }
+                            else
+                            {
+                                <p>You need to scan a ticket to rate this exhibit.</p>
+                            }
+                        </div>
+                    </div>
+                    @if (Model.Ratings.Count() > 0 && Model.Ratings.Any(r => !string.IsNullOrEmpty(r.Message)))
+                    {
+                        <h6>Reviews:</h6>
+                        foreach(var rating in Model.Ratings)
+                        {
+                            if (!string.IsNullOrEmpty(rating.Message))
+                            {
+                                <p class="mt-2">@rating.Message</p>
+                            }
+                        }
+                    }
+                </div>
             </div>
-        }
-        else
-        {
-            <p>You need to scan a ticket to rate this exhibit.</p>
-        }
-        @if (Model.Ratings.Count() > 0 && Model.Ratings.Any(r => !string.IsNullOrEmpty(r.Message)))
-        {
-            <h5 class="mt-3">Reviews:</h5>
-            foreach(var rating in Model.Ratings)
-            {
-                if (!string.IsNullOrEmpty(rating.Message))
-                {
-                    <p class="mt-2">@rating.Message</p>
-                }
-            }
-        }
-    </div>
+        </div>
+    </section>
+    <!-- Close Content -->
 </div>
